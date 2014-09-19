@@ -4,13 +4,13 @@ author: "Reid (Me)"
 date: "September 21, 2014"
 output: html_document
 ---
-#Please download the following files: 
+##Please download the following files: 
 
-##server.R, 
+server.R, 
 
-##ui.R
+ui.R
 
-#Then navigate to the folder where they're all located
+##Then navigate to the folder where they're all located
 Make sure Shiny is installed, then:
 cut and paste the following code
 ````{r}
@@ -18,4 +18,4 @@ require(shiny)
 shiny::runApp()
 ````
 
-And you'll see the most beautiful Shiny App every created by a person within only one week. 
+And you'll see the most beautiful Shiny App every created by a person. 
