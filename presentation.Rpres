@@ -1,0 +1,63 @@
+Tipping a Cabbie: What's tip-ical*?
+========================================================
+author: Reid Offringa, PhD
+date: 9/21/14
+*this is a joke, not a misspelling
+
+How much are peopling tipping cab drivers?
+========================================================
+
+We'll download data, explore it with ggplot and build a regression.  
+
+A summary of what you'll see
+
+- Basically, zero cab drivers reported their cash tips, in this sample.
+- There is a subtle, positive relationship between the number of fares and tip percent.
+- Not shown: There is a subtle, negative relationship between monthly income and tip percent. 
+- To be clear, "typical" is the way it's usually spelled. 
+
+First, we download the data:
+========================================================
+
+```{r, cache=TRUE}
+
+require(RCurl)
+require(utils)
+require(caret)
+
+URL<-"https://dl.dropboxusercontent.com/s/62vvnbcwl5u3xth/DF.csv"
+
+download.file(URL, destfile = "./taxi.csv", method="curl")
+
+taxi<-read.csv("taxi.csv")
+
+```
+Then, I used the Caret package to build a linear regression
+========================================================
+- I know, I know, it's not ideal. Cut me some slack, I'm a psychologist and linear models are my jam. 
+```{r, cache=TRUE}
+tip<-train(mean_tip~ payment_type+count+fare_amount+
+                       payment_type*count+count*fare_amount,
+                   data=taxi, method = "glm") #Everything is linear! Hooray! 
+
+
+````
+
+A prediction algorithm for Shiny!
+========================================================
++I don't have room to show the coefficients, so here's a graph:
+```{r, echo=FALSE, cache=TRUE}
+tipcorr<-ggplot(taxi, aes(x=mean_tip, y=count, color=payment_type)) + geom_point(shape=1)+
+    scale_color_discrete(name="Payment Method",
+                            breaks=c("CRD", "CSH"),
+                            labels=c("Credit Card", "Cash"))
+tc<-tipcorr+xlim(0, .35)+ 
+    geom_smooth(method=lm,   
+                    se=FALSE,    
+                    fullrange=F)+ 
+    ggtitle("OK, it's not the best regression, but it was hard to find a good one")+
+    xlab("Average Tip Percent") +
+    ylab("Number of Fares Picked up Last Month")
+tc
+
+```
