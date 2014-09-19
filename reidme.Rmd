@@ -10,4 +10,12 @@ output: html_document
 
 ##ui.R
 
-#Then 
+#Then navigate to the folder where they're all located
+Make sure Shiny is installed, then:
+cut and paste the following code
+````{r}
+require(shiny)
+shiny::runApp()
+````
+
+And you'll see the most beautiful Shiny App every created by a person within only one week. 
