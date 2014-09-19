@@ -18,4 +18,4 @@ require(shiny)
 shiny::runApp()
 ````
 
-And you'll see the most beautiful Shiny App every created by a person. 
+And you'll see the most beautiful Shiny App every created by a person, within a limited timeframe. 
