@@ -5,7 +5,7 @@ shinyUI(
         sidebarPanel(
             numericInput('count', 'How many fares do you pick up last month?', 457, min = 1, max = 1001, step = 1),
             numericInput('fares', 'What is your gross monthly income?', 5332, min = 0, max = 5000, step = 100),
-            checkboxGroupInput("id2", "Do you want to know about Crash or Credit transactions?", 
+            checkboxGroupInput("id2", "Do you want to know about Crash or Credit transactions? Keep in mind that you should only have one box checked at one time", 
                                c("Cash" = "1",
                                  "Credit" = "0"), 0),
             submitButton('Submit')
